@@ -1,6 +1,6 @@
-const url = (window.location.hostname.includes('localhost'))
-    ? 'http://localhost:3000/api/auth/'
-    : 'https://curso-node-restserver-mlkw.onrender.com/api/auth/';
+const url = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000/api/auth/"
+  : "https://webav-api.onrender.com/api/auth/";
 
 let usuario = null;
 let socketServer = null;
