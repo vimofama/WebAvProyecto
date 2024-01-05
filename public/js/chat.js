@@ -73,11 +73,11 @@ const dibujarUsuarios = (usuarios = []) => {
 
 const dibujarMensajes = (mensajes = []) => {
     let mensjaesHtml = '';
-    mensajes.forEach(({nombre, mensaje}) => {
+    mensajes.forEach(({de, mensaje}) => {
         mensjaesHtml += `
             <li>
                 <p>
-                    <span class="text-primary"> ${nombre}:</span>
+                    <span class="text-primary"> ${de.nombre}:</span>
                     <span>${mensaje}</span>
                 </p>
             </li>
