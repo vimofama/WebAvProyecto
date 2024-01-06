@@ -5,11 +5,22 @@ const { validarCampos, validarAdminJWT } = require('../middlewares');
 
 const {existeUsuarioPorId} = require('../helpers/db-validators');
 
-const {usuariosGet, usuariosPost, usuariosPut, usuariosDelete} = require('../controllers/usuarios');
+const {
+  usuariosGet,
+  usuariosPost,
+  usuariosPut,
+  usuariosDelete,
+  usuarioGetByCorreo,
+} = require("../controllers/usuarios");
 
 const router = Router();
 
 router.get('/', usuariosGet);
+
+router.get("/:correo", [
+    check("correo", "El correo no es válido").isEmail(),
+     validarCampos
+], usuarioGetByCorreo);
 
 router.post('/', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),

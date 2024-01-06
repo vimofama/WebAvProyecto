@@ -9,6 +9,22 @@ const usuariosGet = async(req, res) => {
     });
 };
 
+const usuarioGetByCorreo = async(req, res) => {
+    const {correo} = req.params;
+
+    const usuario = await Usuario.findOne({correo});
+
+    if (!usuario) {
+        return res.status(400).json({
+            msg: `El correo ${correo} no está registrado`
+        });
+    }
+
+    res.status(200).json({
+        usuario
+    });
+}
+
 const usuariosPost = async(req, res) => {
     const {nombre, correo, password, rol} = req.body;
     const usuario = new Usuario({nombre, correo, password, rol});
@@ -68,5 +84,6 @@ module.exports = {
     usuariosGet,
     usuariosPost,
     usuariosPut,
-    usuariosDelete
+    usuariosDelete,
+    usuarioGetByCorreo,
 }

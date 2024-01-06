@@ -5,8 +5,8 @@ const Mensajes = require('../models/mensajes');
 
 usuarios = {};
 
-const ultimosMensajes = () => {
-  return Mensajes.find()
+const ultimosMensajesPublicos = () => {
+  return Mensajes.find({para: {$exists: false}})
     .sort({ timestamp: -1 })
     .limit(10)
     .populate("de", "nombre")
@@ -32,7 +32,7 @@ const socketController = async (socket = new Socket(), io) => {
     // Agregar el usuario conectado
     usuarios[usuario.id] = usuario;
     io.emit('usuarios-activos', Object.values(usuarios));
-    socket.emit('recibir-mensajes', await ultimosMensajes());
+    socket.emit('recibir-mensajes', await ultimosMensajesPublicos());
 
     // Conectarlo a una sala especial
     socket.join(usuario.id); // global, socket.id, usuario.id
@@ -52,7 +52,7 @@ const socketController = async (socket = new Socket(), io) => {
         }else{
             const mensajeDB = new Mensajes({de: usuario.id, mensaje});
             await mensajeDB.save();
-            io.emit("recibir-mensajes", await ultimosMensajes());
+            io.emit("recibir-mensajes", await ultimosMensajesPublicos());
         }
     });
 
