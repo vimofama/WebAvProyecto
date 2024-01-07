@@ -57,7 +57,7 @@ const usuariosPost = async(req, res) => {
 
 const usuariosPut = async(req, res) => {
     const {id} = req.params;
-    const {_id, password, correo, rol, ...resto} = req.body;
+    const {_id, password, correo, ...resto} = req.body;
 
     if(password){
         // Encriptar la contraseña
@@ -67,7 +67,7 @@ const usuariosPut = async(req, res) => {
 
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
 
-    res.json(usuario);
+    res.status(200).json(usuario);
 };
 
 const usuariosDelete = async(req, res) => {
@@ -81,9 +81,9 @@ const usuariosDelete = async(req, res) => {
 };
 
 module.exports = {
-    usuariosGet,
-    usuariosPost,
-    usuariosPut,
-    usuariosDelete,
-    usuarioGetByCorreo,
-}
+  usuariosGet,
+  usuariosPost,
+  usuariosPut,
+  usuariosDelete,
+  usuarioGetByCorreo,
+};

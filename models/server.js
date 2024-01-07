@@ -41,7 +41,9 @@ class Server {
         this.app.use(express.json());
 
         // Directorio público
-        this.app.use(express.static('public'));
+        // this.app.use(express.static('public'));
+        // Directorio dist creado en astro
+        this.app.use(express.static('dist'));
     }
 
     routes(){
