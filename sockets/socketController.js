@@ -8,7 +8,6 @@ usuarios = {};
 const ultimosMensajesPublicos = () => {
   return Mensajes.find({para: {$exists: false}})
     .sort({ timestamp: -1 })
-    .limit(10)
     .populate("de", "nombre")
     .exec()
     .then((mensajes) => {
